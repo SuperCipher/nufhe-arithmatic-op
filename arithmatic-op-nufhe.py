@@ -42,6 +42,8 @@ def boolListToInt(bitlists):
         out = (out << 1) | bit
     return out
 
+### testing ###
+
 ctx = nufhe.Context()
 secret_key, cloud_key = ctx.make_key_pair()
 # size even decimal only
