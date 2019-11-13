@@ -48,7 +48,7 @@ ctx = nufhe.Context()
 secret_key, cloud_key = ctx.make_key_pair()
 # size even decimal only
 size = 32
-# test decimal number
+# test decimal number. need to be less than size/2
 deci_x = 3093
 deci_y = 1999
 
