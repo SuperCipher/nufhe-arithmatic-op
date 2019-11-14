@@ -26,6 +26,7 @@ def checkSubtract(sub1,sub2):
         return sub1
 
 def add(ciX, ciY):
+# fixed iteration since
     for i in range(size):
         a = vm.gate_and(ciX, ciY)
         b = vm.gate_xor(ciX, ciY)
@@ -63,7 +64,7 @@ vm = ctx.make_virtual_machine(cloud_key)
 # subtraction have to be done twice since we don't know which one is grater than the other
 subXthenY = ctx.decrypt(secret_key, subtract(ciX, ciY))
 subYthenX = ctx.decrypt(secret_key, subtract(ciY, ciX))
-# the Lesser result is the right one
+# the Lesser subtraction result is the right one
 plainSubtractNumber = checkSubtract(boolListToInt(subXthenY),boolListToInt(subYthenX))
 print("reference subtract number is : ", (deci_x-deci_y) ,"/ nuFHE subtract number is : ", plainSubtractNumber)
 
