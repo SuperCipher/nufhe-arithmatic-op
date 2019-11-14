@@ -31,6 +31,7 @@ def add(ciX, ciY):
         a = vm.gate_and(ciX, ciY)
         b = vm.gate_xor(ciX, ciY)
         aShiftTemp = a
+        # using roll as a shift bit
         aShiftTemp.roll(-1, axis=-1)
         ciX = aShiftTemp
         ciY = b
@@ -49,7 +50,7 @@ ctx = nufhe.Context()
 secret_key, cloud_key = ctx.make_key_pair()
 # size even decimal only
 size = 32
-# test decimal number. need to be less than size/2
+# test decimal number. bits lenght need to be less than size/2
 deci_x = 3093
 deci_y = 1999
 
@@ -64,7 +65,7 @@ vm = ctx.make_virtual_machine(cloud_key)
 # subtraction have to be done twice since we don't know which one is grater than the other
 subXthenY = ctx.decrypt(secret_key, subtract(ciX, ciY))
 subYthenX = ctx.decrypt(secret_key, subtract(ciY, ciX))
-# the Lesser subtraction result is the right one
+# the Lesser subtraction result is the right one, this have to be done after decrypting themessage
 plainSubtractNumber = checkSubtract(boolListToInt(subXthenY),boolListToInt(subYthenX))
 print("reference subtract number is : ", (deci_x-deci_y) ,"/ nuFHE subtract number is : ", plainSubtractNumber)
 
